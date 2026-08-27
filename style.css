@@ -6,29 +6,61 @@
 }
 
 body {
-    background-color: #0f0f15;
+    background-color: #030308;
+    /* Capas de Nebulosas y Estrellas en CSS Puro */
+    background-image: 
+        /* Polvo estelar azul violáceo */
+        radial-gradient(circle at 20% 20%, rgba(76, 29, 149, 0.45) 0%, transparent 40%),
+        /* Núcleo cian resplandeciente */
+        radial-gradient(circle at 80% 80%, rgba(0, 210, 255, 0.35) 0%, transparent 50%),
+        /* Destello galáctico central */
+        radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.25) 0%, transparent 60%),
+        /* Campo de estrellas distantes (patrón de puntos) */
+        radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 150px 210px, #00d2ff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 300px 400px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 500px 100px, #e9d5ff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 700px 350px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 900px 150px, #00d2ff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 600px 600px, 500px 500px, 400px 400px, 650px 650px, 700px 700px, 550px 550px;
+    background-attachment: fixed;
     color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    animation: galaxyGlow 12s ease-in-out infinite alternate;
+}
+
+/* Animación sutil del resplandor de la galaxia */
+@keyframes galaxyGlow {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    100% {
+        filter: hue-rotate(25deg) brightness(1.15);
+    }
 }
 
 .player-container {
-    background-color: #1a1a24;
-    border-radius: 16px;
+    background-color: rgba(12, 12, 22, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 20px;
     width: 100%;
     max-width: 420px;
     padding: 25px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-    border: 1px solid #2a2a3a;
+    box-shadow: 0 0 45px rgba(0, 210, 255, 0.25), 0 15px 35px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 210, 255, 0.3);
 }
 
 .player-header {
     text-align: center;
     margin-bottom: 20px;
     color: #00d2ff;
+    text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
 }
 
 .category-selector {
@@ -39,9 +71,9 @@ body {
 }
 
 .category-selector select {
-    background: #252535;
+    background: rgba(25, 25, 40, 0.85);
     color: #fff;
-    border: 1px solid #3a3a50;
+    border: 1px solid rgba(0, 210, 255, 0.4);
     padding: 8px 12px;
     border-radius: 8px;
     outline: none;
@@ -53,17 +85,17 @@ body {
     height: 140px;
     margin: 0 auto 20px auto;
     border-radius: 50%;
-    background: linear-gradient(135deg, #00d2ff11, #00d2ff44);
+    background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, rgba(5, 5, 15, 0.8) 100%);
     border: 3px solid #00d2ff;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
     transition: all 0.3s ease;
 }
 
 .audio-visualizer.playing {
-    box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
+    box-shadow: 0 0 40px rgba(0, 210, 255, 0.8);
     animation: pulse 1.8s infinite ease-in-out;
 }
 
@@ -76,6 +108,7 @@ body {
 .music-icon {
     font-size: 3rem;
     color: #00d2ff;
+    filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.8));
 }
 
 .now-playing {
@@ -91,7 +124,7 @@ body {
 
 .now-playing p {
     font-size: 0.85rem;
-    color: #8a8a9a;
+    color: #a0a0b0;
 }
 
 .controls {
@@ -103,9 +136,9 @@ body {
 }
 
 .btn {
-    background: #252535;
+    background: rgba(30, 30, 48, 0.8);
     color: #fff;
-    border: 1px solid #3a3a50;
+    border: 1px solid rgba(0, 210, 255, 0.3);
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -118,8 +151,9 @@ body {
 }
 
 .btn:hover {
-    background: #3a3a50;
+    background: rgba(0, 210, 255, 0.2);
     color: #00d2ff;
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
 }
 
 .btn-main {
@@ -129,19 +163,22 @@ body {
     height: 55px;
     font-size: 1.3rem;
     border: none;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
 }
 
 .btn-main:hover {
     background: #00b8e6;
     color: #000;
+    box-shadow: 0 0 28px rgba(0, 210, 255, 0.9);
 }
 
 .playlist-container {
     max-height: 180px;
     overflow-y: auto;
-    background: #12121a;
-    border-radius: 8px;
+    background: rgba(12, 12, 20, 0.85);
+    border-radius: 10px;
     padding: 10px;
+    border: 1px solid rgba(0, 210, 255, 0.15);
 }
 
 .playlist-container h4 {
@@ -156,18 +193,19 @@ body {
 
 #playlist li {
     padding: 8px 10px;
-    border-bottom: 1px solid #1a1a24;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
     font-size: 0.85rem;
     border-radius: 4px;
+    transition: background 0.2s;
 }
 
 #playlist li:hover {
-    background: #252535;
+    background: rgba(0, 210, 255, 0.1);
 }
 
 #playlist li.active {
-    background: #00d2ff22;
+    background: rgba(0, 210, 255, 0.2);
     color: #00d2ff;
     font-weight: bold;
 }

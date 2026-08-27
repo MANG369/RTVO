@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANG369 Audio Player</title>
+    <title>MANG369 Galaxy Audio Player</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="player-container">
         <header class="player-header">
-            <h2><i class="fa-solid fa-compact-disc spin"></i> RTVO</h2>
+            <h2><i class="fa-solid fa-compact-disc spin"></i> RTVO MANG 369</h2>
         </header>
 
         <!-- Selector de Categoría -->
@@ -18,22 +18,22 @@
             <label for="categorySelect">Categoría:</label>
             <select id="categorySelect" onchange="changeCategory()">
                 <option value="AMOR">Amor</option>
-                <option value="CORRIDOS">Corrido</option>
+                <option value="EL_PATRON">El Patrón</option>
                 <option value="ARABE">Árabe</option>
                 <option value="SALSA">Salsa</option>
                 <option value="MEDICINA">Medicina</option>
                 <option value="LLANERAS">Llaneras</option>
-                <option value="ROCK">Rock</option>
+                <option value="GENERAL">General</option>
             </select>
         </div>
 
-        <!-- Visualizador de Carátula / Audio -->
+        <!-- Visualizador de Carátula Galáctico -->
         <div class="audio-visualizer" id="visualizer">
-            <i class="fa-solid fa-music music-icon"></i>
+            <i class="fa-solid fa-radio music-icon"></i>
         </div>
 
-        <!-- Contenedor del reproductor de YouTube (oculto) -->
-        <div id="hidden-player" style="display: none;"></div>
+        <!-- Contenedor del reproductor de YouTube (oculto de forma segura) -->
+        <div id="hidden-player" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
 
         <div class="now-playing">
             <h3 id="songTitle">Cargando reproductor...</h3>
@@ -42,9 +42,9 @@
 
         <!-- Controles principales -->
         <div class="controls">
-            <button onclick="prevSong()" class="btn"><i class="fa-solid fa-backward"></i></button>
-            <button id="playBtn" onclick="togglePlay()" class="btn btn-main"><i class="fa-solid fa-play"></i></button>
-            <button onclick="nextSong()" class="btn"><i class="fa-solid fa-forward"></i></button>
+            <button onclick="prevSong()" class="btn" title="Anterior"><i class="fa-solid fa-backward"></i></button>
+            <button id="playBtn" onclick="togglePlay()" class="btn btn-main" title="Reproducir/Pausar"><i class="fa-solid fa-play"></i></button>
+            <button onclick="nextSong()" class="btn" title="Siguiente"><i class="fa-solid fa-forward"></i></button>
         </div>
 
         <!-- Lista de reproducción -->
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <!-- API de YouTube -->
+    <!-- API de YouTube IFrame -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
