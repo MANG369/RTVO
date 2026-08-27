@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANG369 Audio Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="player-container">
+        <header class="player-header">
+            <h2><i class="fa-solid fa-compact-disc spin"></i> MANG 369 Audio</h2>
+        </header>
+
+        <!-- Selector de Categoría -->
+        <div class="category-selector">
+            <label for="categorySelect">Categoría:</label>
+            <select id="categorySelect" onchange="changeCategory()">
+                <option value="AMOR">Amor</option>
+                <option value="EL_PATRON">El Patrón</option>
+                <option value="ARABE">Árabe</option>
+                <option value="SALSA">Salsa</option>
+                <option value="MEDICINA">Medicina</option>
+                <option value="LLANERAS">Llaneras</option>
+                <option value="GENERAL">General</option>
+            </select>
+        </div>
+
+        <!-- Visualizador de Carátula / Audio -->
+        <div class="audio-visualizer" id="visualizer">
+            <i class="fa-solid fa-music music-icon"></i>
+        </div>
+
+        <!-- Contenedor del reproductor de YouTube (oculto) -->
+        <div id="hidden-player" style="display: none;"></div>
+
+        <div class="now-playing">
+            <h3 id="songTitle">Cargando reproductor...</h3>
+            <p id="songArtist">Categoría: AMOR</p>
+        </div>
+
+        <!-- Controles principales -->
+        <div class="controls">
+            <button onclick="prevSong()" class="btn"><i class="fa-solid fa-backward"></i></button>
+            <button id="playBtn" onclick="togglePlay()" class="btn btn-main"><i class="fa-solid fa-play"></i></button>
+            <button onclick="nextSong()" class="btn"><i class="fa-solid fa-forward"></i></button>
+        </div>
+
+        <!-- Lista de reproducción -->
+        <div class="playlist-container">
+            <h4>Lista de Pistas</h4>
+            <ul id="playlist"></ul>
+        </div>
+    </div>
+
+    <!-- API de YouTube -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>
