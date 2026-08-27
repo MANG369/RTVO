@@ -24,10 +24,10 @@ const playlistCategorias = {
         { title: "El Patrón 4", id: "Twazrsyj8DA" }
     ],
     ARABE: [
-        { title: "Árabe 1", id: "Qz8agovq_kc" },
-        { title: "Árabe 2", id: "bVjbHxJ_7U0" },
-        { title: "Árabe 3", id: "btYNNu8G5s4" },
-        { title: "Árabe 4", id: "GwTj6i-ce9A" },
+        { title: "Árabe 1", id: "btYNNu8G5s4" },
+        { title: "Árabe 2", id: "Qz8agovq_kc" },
+        { title: "Árabe 3", id: "GwTj6i-ce9A" },
+        { title: "Árabe 4", id: "PWhTtI0FBo4" },
         { title: "Árabe 5", id: "wF6X598iTxs" },
         { title: "Árabe 6", id: "xjR_hZBey-Y" },
         { title: "Árabe 7", id: "HuXQt07KjYc" },
@@ -48,8 +48,7 @@ const playlistCategorias = {
         { title: "Árabe 22", id: "c9CXSbWIpMs" },
         { title: "Árabe 23", id: "vFcTqzeHiBk" },
         { title: "Árabe 24", id: "ddq7TDJ2_VI" },
-        { title: "Árabe 25", id: "PWhTtI0FBo4" },
-        { title: "Árabe 26", id: "4gFtq4TQJFg" }
+        { title: "Árabe 25", id: "4gFtq4TQJFg" }
     ],
     SALSA: [
         { title: "Salsa 1", id: "TwGU4D-f3KM" },
