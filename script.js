@@ -166,7 +166,6 @@ const playlistCategorias = {
         { title: "General 30", id: "jRGrNDV2mKc" }
     ]
 };
-
 const bannersPublicitarios = [
     '<i class="fa-brands fa-tiktok"></i> MANG369:¡Selección de Música para ti (ريهام)!',
     "📢 RTVO Conecta a través de la música!",
