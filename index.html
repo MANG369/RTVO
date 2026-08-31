@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RTVO Audio Player</title>
+    <title>RTVO - Radio Online</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="player-container">
-        <!-- Banner Publicitario Dinámico -->
-        <div id="adBanner">📢 RTVO: ¡Tu Música, Tu Espacio!</div>
 
-        <header class="player-header">
-            <h2><i class="fa-solid fa-compact-disc spin"></i> RTVO </h2>
-        </header>
+    <div class="player-container">
+        <!-- Banner publicitario flotante superior -->
+        <div class="top-banner">
+            <span id="adBanner">Cargando anuncios...</span>
+        </div>
+
+        <!-- Encabezado con Logotipo -->
+        <div class="header">
+            <h1 class="logo"><i class="fa-solid fa-compact-disc spin"></i> RTVO</h1>
+        </div>
 
         <!-- Selector de Categorías -->
         <div class="category-selector">
@@ -30,33 +34,35 @@
             </select>
         </div>
 
-        <!-- Visualizador Galáctico con Logo DJ -->
+      <!-- Visualizador Galáctico con Logo DJ -->
         <div class="audio-visualizer" id="visualizer">
             <img src="logo.jpeg" alt="DJ MANG 369" class="visualizer-logo" id="visualizerLogo">
         </div>
 
-        <!-- Reproductor iframe oculto de YouTube -->
-        <div id="hidden-player" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
-
-        <div class="now-playing">
-            <h3 id="songTitle">Cargando reproductor...</h3>
+        <!-- Información de la canción activa -->
+        <div class="song-details">
+            <h2 id="songTitle">Cargando reproductor...</h2>
             <p id="songArtist">Categoría: AMOR</p>
         </div>
 
-        <!-- Controles de reproducción -->
+        <!-- Botones de Control del Reproductor -->
         <div class="controls">
-            <button onclick="prevSong()" class="btn" title="Anterior"><i class="fa-solid fa-backward"></i></button>
-            <button id="playBtn" onclick="togglePlay()" class="btn btn-main" title="Reproducir/Pausar"><i class="fa-solid fa-play"></i></button>
-            <button onclick="nextSong()" class="btn" title="Siguiente"><i class="fa-solid fa-forward"></i></button>
+            <button class="btn" onclick="prevSong()"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="btn play-btn" id="playBtn" onclick="togglePlay()"><i class="fa-solid fa-play"></i></button>
+            <button class="btn" onclick="nextSong()"><i class="fa-solid fa-forward-step"></i></button>
         </div>
 
-        <!-- Lista de reproducción -->
+        <!-- Contenedor de la Lista de Reproducción -->
         <div class="playlist-container">
-            <h4>Lista de Pistas</h4>
+            <h3>Lista de Pistas</h3>
             <ul id="playlist"></ul>
         </div>
     </div>
 
+    <!-- Contenedor Iframe invisible para la API de YouTube -->
+    <div id="hidden-player" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
+
+    <!-- Scripts de carga -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
