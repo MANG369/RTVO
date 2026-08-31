@@ -1,5 +1,6 @@
 const playlistCategorias = {
     AMOR: [
+        { title: "Amor 0", id: "agK8buPQbxM" },
         { title: "Amor 1", id: "bjw_PUWq9zE" },
         { title: "Amor 2", id: "Y_0gUaCb1C8" },
         { title: "Amor 3", id: "cMhT1SqxqHY" },
@@ -18,12 +19,14 @@ const playlistCategorias = {
         { title: "Amor 16", id: "_6HpI5i84w8" }
     ],
     EL_PATRON: [
+        { title: "El Patrón 0", id: "agK8buPQbxM" },
         { title: "El Patrón 1", id: "LruRZKY3KFY" },
         { title: "El Patrón 2", id: "U3fMHWnUWLI" },
         { title: "El Patrón 3", id: "6Lielvgiu3E" },
         { title: "El Patrón 4", id: "Twazrsyj8DA" }
     ],
     ARABE: [
+        { title: "Árabe 0", id: "agK8buPQbxM" },
         { title: "Árabe 1", id: "btYNNu8G5s4" },
         { title: "Árabe 2", id: "Qz8agovq_kc" },
         { title: "Árabe 3", id: "GwTj6i-ce9A" },
@@ -50,7 +53,8 @@ const playlistCategorias = {
         { title: "Árabe 24", id: "ddq7TDJ2_VI" },
         { title: "Árabe 25", id: "4gFtq4TQJFg" }
     ],
-    SALSA: [
+    SALSA: [ 
+        { title: "Salsa 0", id: "agK8buPQbxM" },
         { title: "Salsa 1", id: "TwGU4D-f3KM" },
         { title: "Salsa 2", id: "8npywMdv0Sw" },
         { title: "Salsa 3", id: "D_0FKJqxldE" },
@@ -73,6 +77,7 @@ const playlistCategorias = {
         { title: "Salsa 20", id: "TnldDo_T6i8" }
     ],
     MEDICINA: [
+        { title: "Medicina 0", id: "agK8buPQbxM" },
         { title: "Medicina 1", id: "LfrBaI3Gf_g" },
         { title: "Medicina 2", id: "rHuUa0radLw" },
         { title: "Medicina 3", id: "x2hg9m1oJJc" },
@@ -115,6 +120,7 @@ const playlistCategorias = {
         { title: "Medicina 40", id: "jiG8LDcsCHA" }
     ],
     LLANERAS: [
+        { title: "Llanera 0", id: "agK8buPQbxM" },
         { title: "Llanera 1", id: "FImOYoyORE4" },
         { title: "Llanera 2", id: "gXBWmWq9FsU" },
         { title: "Llanera 3", id: "vTF3PlSvb78" },
@@ -134,6 +140,7 @@ const playlistCategorias = {
         { title: "Llanera 17", id: "4Y3jV2St_f8" }
     ],
     GENERAL: [
+        { title: "General 0", id: "agK8buPQbxM" },
         { title: "General 1", id: "GZ3zL7kT6_c" },
         { title: "General 2", id: "Jp7jM7yJKB4" },
         { title: "General 3", id: "WRcCBI5rFfM" },
@@ -169,7 +176,7 @@ const playlistCategorias = {
 
 // 📢 LISTA DE JINGLES / PROMOS PROPIOS
 const publicidadList = [
-    { title: "RTVO - Tu Música, Tu Espacio (Reham)", id: "agK8buPQbxM" }
+    { title: "RTVO - Tu Música, Tu Espacio (Reham)", id: "xxxx" }
 ];
 
 let player;
