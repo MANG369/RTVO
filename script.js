@@ -167,10 +167,17 @@ const playlistCategorias = {
     ]
 };
 
+// 📢 LISTA DE JINGLES / PROMOS PROPIOS
+const publicidadList = [
+    { title: "RTVO - Tu Música, Tu Espacio (Salsa)", id: "agK8buPQbxM" }
+];
+
 let player;
 let isPlaying = false;
 let currentCategory = "AMOR";
 let currentSongIndex = 0;
+let currentAdIndex = 0;
+let reproduciendoAnuncio = false;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('hidden-player', {
@@ -180,7 +187,7 @@ function onYouTubeIframeAPIReady() {
             'controls': 0,
             'rel': 0,
             'modestbranding': 1,
-            'iv_load_policy': 3,
+            'iv_load_policy': 3, // Oculta anotaciones y tarjetas emergentes de YouTube
             'playsinline': 1
         },
         events: {
@@ -213,34 +220,52 @@ function onPlayerStateChange(event) {
 
 function changeCategory() {
     const select = document.getElementById("categorySelect");
+    if (!select) return;
     currentCategory = select.value;
     currentSongIndex = 0;
+    reproduciendoAnuncio = false;
     renderPlaylist();
     loadSong(0);
 }
 
 function renderPlaylist() {
     const playlistEl = document.getElementById("playlist");
+    if (!playlistEl) return;
     playlistEl.innerHTML = "";
     
     playlistCategorias[currentCategory].forEach((song, index) => {
         const li = document.createElement("li");
         li.textContent = `${index + 1}. ${song.title}`;
-        if (index === currentSongIndex) li.classList.add("active");
-        li.onclick = () => loadSong(index);
+        if (index === currentSongIndex && !reproduciendoAnuncio) li.classList.add("active");
+        li.onclick = () => {
+            reproduciendoAnuncio = false;
+            loadSong(index);
+        };
         playlistEl.appendChild(li);
     });
 }
 
 function updateSongInfo() {
-    const song = playlistCategorias[currentCategory][currentSongIndex];
-    document.getElementById("songTitle").textContent = song.title;
-    document.getElementById("songArtist").textContent = `Categoría: ${currentCategory.replace('_', ' ')}`;
-    
-    const items = document.querySelectorAll("#playlist li");
-    items.forEach((item, i) => {
-        item.classList.toggle("active", i === currentSongIndex);
-    });
+    const titleEl = document.getElementById("songTitle");
+    const artistEl = document.getElementById("songArtist");
+
+    if (reproduciendoAnuncio) {
+        const ad = publicidadList[currentAdIndex];
+        if (titleEl) titleEl.textContent = `📢 ${ad.title}`;
+        if (artistEl) artistEl.textContent = "Jingle Oficial - RTVO";
+        
+        const items = document.querySelectorAll("#playlist li");
+        items.forEach(item => item.classList.remove("active"));
+    } else {
+        const song = playlistCategorias[currentCategory][currentSongIndex];
+        if (titleEl) titleEl.textContent = song.title;
+        if (artistEl) artistEl.textContent = `Categoría: ${currentCategory.replace('_', ' ')}`;
+        
+        const items = document.querySelectorAll("#playlist li");
+        items.forEach((item, i) => {
+            item.classList.toggle("active", i === currentSongIndex);
+        });
+    }
 }
 
 function loadSong(index) {
@@ -255,19 +280,33 @@ function loadSong(index) {
     updateSongInfo();
 }
 
+function loadAd() {
+    const ad = publicidadList[currentAdIndex];
+    if (player && player.loadVideoById) {
+        player.loadVideoById(ad.id);
+        isPlaying = true;
+        updateUIState();
+    }
+    updateSongInfo();
+}
+
 function togglePlay() {
     if (!player) return;
     
     if (isPlaying) {
         player.pauseVideo();
     } else {
-        const song = playlistCategorias[currentCategory][currentSongIndex];
-        const videoData = player.getVideoData ? player.getVideoData() : null;
-        
-        if (!videoData || !videoData.video_id) {
-            player.loadVideoById(song.id);
-        } else {
+        if (reproduciendoAnuncio) {
             player.playVideo();
+        } else {
+            const song = playlistCategorias[currentCategory][currentSongIndex];
+            const videoData = player.getVideoData ? player.getVideoData() : null;
+            
+            if (!videoData || !videoData.video_id) {
+                player.loadVideoById(song.id);
+            } else {
+                player.playVideo();
+            }
         }
     }
 }
@@ -276,16 +315,19 @@ function updateUIState() {
     const playBtn = document.getElementById("playBtn");
     const visualizer = document.getElementById("visualizer");
     
-    if (isPlaying) {
-        playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        visualizer.classList.add("playing");
-    } else {
-        playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        visualizer.classList.remove("playing");
+    if (playBtn) {
+        playBtn.innerHTML = isPlaying 
+            ? '<i class="fa-solid fa-pause"></i>' 
+            : '<i class="fa-solid fa-play"></i>';
+    }
+    
+    if (visualizer) {
+        visualizer.classList.toggle("playing", isPlaying);
     }
 }
 
 function prevSong() {
+    reproduciendoAnuncio = false;
     currentSongIndex--;
     if (currentSongIndex < 0) {
         currentSongIndex = playlistCategorias[currentCategory].length - 1;
@@ -294,9 +336,16 @@ function prevSong() {
 }
 
 function nextSong() {
-    currentSongIndex++;
-    if (currentSongIndex >= playlistCategorias[currentCategory].length) {
-        currentSongIndex = 0;
+    if (!reproduciendoAnuncio && publicidadList.length > 0) {
+        reproduciendoAnuncio = true;
+        loadAd();
+        currentAdIndex = (currentAdIndex + 1) % publicidadList.length;
+    } else {
+        reproduciendoAnuncio = false;
+        currentSongIndex++;
+        if (currentSongIndex >= playlistCategorias[currentCategory].length) {
+            currentSongIndex = 0;
+        }
+        loadSong(currentSongIndex);
     }
-    loadSong(currentSongIndex);
 }
