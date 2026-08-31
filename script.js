@@ -1,7 +1,7 @@
 const playlistCategorias = {
     AMOR: [
-        { title: "Amor 1", id: "bjw_PUWq9zE" },
-        { title: "Amor 2", id: "Y_0gUaCb1C8" },
+        { title: "Amor 1", id: "agK8buPQbxM" },
+        { title: "Amor 2", id: "bjw_PUWq9zE" },
         { title: "Amor 3", id: "cMhT1SqxqHY" },
         { title: "Amor 4", id: "4dyjL34qDis" },
         { title: "Amor 5", id: "NgVmz3gfHd0" },
@@ -14,8 +14,9 @@ const playlistCategorias = {
         { title: "Amor 12", id: "HfzbN5ky5Co" },
         { title: "Amor 13", id: "mJGRQ5gZmmc" },
         { title: "Amor 14", id: "lmDfmilZ4Xo" },
-        { title: "Amor 15", id: "15iEJ0qY_70" },
-        { title: "Amor 16", id: "_6HpI5i84w8" }
+        { title: "Amor 15", id: "Y_0gUaCb1C8" },
+        { title: "Amor 16", id: "15iEJ0qY_70" },
+        { title: "Amor 17", id: "_6HpI5i84w8" }
     ],
     EL_PATRON: [
         { title: "El Patrón 1", id: "LruRZKY3KFY" },
@@ -168,10 +169,16 @@ const playlistCategorias = {
     ]
 };
 
+const publicidadList = [
+    { title: "RTVO - Tu Espacio (Reham)", id: "agK8buPQbxM" }
+];
+
 let player;
 let isPlaying = false;
 let currentCategory = "AMOR";
 let currentSongIndex = 0;
+let currentAdIndex = 0;
+let reproduciendoAnuncio = false;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('hidden-player', {
@@ -182,11 +189,14 @@ function onYouTubeIframeAPIReady() {
             'rel': 0,
             'modestbranding': 1,
             'iv_load_policy': 3,
-            'playsinline': 1
+            'playsinline': 1,
+            'enablejsapi': 1,
+            'origin': window.location.origin || '*'
         },
         events: {
             'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError
         }
     });
 }
@@ -195,7 +205,7 @@ function onPlayerReady(event) {
     renderPlaylist();
     updateSongInfo();
     const firstSong = playlistCategorias[currentCategory][0];
-    if (player && player.cueVideoById) {
+    if (player && typeof player.cueVideoById === 'function') {
         player.cueVideoById(firstSong.id);
     }
 }
@@ -212,44 +222,80 @@ function onPlayerStateChange(event) {
     }
 }
 
+function onPlayerError(event) {
+    console.warn("YouTube Player Error:", event.data, "- Saltando pista inaccesible.");
+    nextSong();
+}
+
 function changeCategory() {
     const select = document.getElementById("categorySelect");
+    if (!select) return;
     currentCategory = select.value;
     currentSongIndex = 0;
+    reproduciendoAnuncio = false;
     renderPlaylist();
     loadSong(0);
 }
 
 function renderPlaylist() {
     const playlistEl = document.getElementById("playlist");
+    if (!playlistEl) return;
     playlistEl.innerHTML = "";
     
     playlistCategorias[currentCategory].forEach((song, index) => {
         const li = document.createElement("li");
         li.textContent = `${index + 1}. ${song.title}`;
-        if (index === currentSongIndex) li.classList.add("active");
-        li.onclick = () => loadSong(index);
+        if (index === currentSongIndex && !reproduciendoAnuncio) {
+            li.classList.add("active");
+        }
+        li.onclick = () => {
+            reproduciendoAnuncio = false;
+            loadSong(index);
+        };
         playlistEl.appendChild(li);
     });
 }
 
 function updateSongInfo() {
-    const song = playlistCategorias[currentCategory][currentSongIndex];
-    document.getElementById("songTitle").textContent = song.title;
-    document.getElementById("songArtist").textContent = `Categoría: ${currentCategory.replace('_', ' ')}`;
-    
-    const items = document.querySelectorAll("#playlist li");
-    items.forEach((item, i) => {
-        item.classList.toggle("active", i === currentSongIndex);
-    });
+    const titleEl = document.getElementById("songTitle");
+    const artistEl = document.getElementById("songArtist");
+
+    if (reproduciendoAnuncio) {
+        const ad = publicidadList[currentAdIndex];
+        if (titleEl) titleEl.textContent = `📢 ${ad.title}`;
+        if (artistEl) artistEl.textContent = "Jingle Oficial - RTVO";
+        
+        const items = document.querySelectorAll("#playlist li");
+        items.forEach(item => item.classList.remove("active"));
+    } else {
+        const song = playlistCategorias[currentCategory][currentSongIndex];
+        if (titleEl) titleEl.textContent = song ? song.title : "Título no disponible";
+        if (artistEl) artistEl.textContent = `Categoría: ${currentCategory.replace('_', ' ')}`;
+        
+        const items = document.querySelectorAll("#playlist li");
+        items.forEach((item, i) => {
+            item.classList.toggle("active", i === currentSongIndex);
+        });
+    }
 }
 
 function loadSong(index) {
     currentSongIndex = index;
     const song = playlistCategorias[currentCategory][index];
-    
-    if (player && player.loadVideoById) {
+    if (!song) return;
+
+    if (player && typeof player.loadVideoById === 'function') {
         player.loadVideoById(song.id);
+        isPlaying = true;
+        updateUIState();
+    }
+    updateSongInfo();
+}
+
+function loadAd() {
+    const ad = publicidadList[currentAdIndex];
+    if (ad && player && typeof player.loadVideoById === 'function') {
+        player.loadVideoById(ad.id);
         isPlaying = true;
         updateUIState();
     }
@@ -260,15 +306,19 @@ function togglePlay() {
     if (!player) return;
     
     if (isPlaying) {
-        player.pauseVideo();
+        if (typeof player.pauseVideo === 'function') player.pauseVideo();
     } else {
-        const song = playlistCategorias[currentCategory][currentSongIndex];
-        const videoData = player.getVideoData ? player.getVideoData() : null;
-        
-        if (!videoData || !videoData.video_id) {
-            player.loadVideoById(song.id);
+        if (reproduciendoAnuncio) {
+            if (typeof player.playVideo === 'function') player.playVideo();
         } else {
-            player.playVideo();
+            const song = playlistCategorias[currentCategory][currentSongIndex];
+            const videoData = (typeof player.getVideoData === 'function') ? player.getVideoData() : null;
+            
+            if (!videoData || !videoData.video_id) {
+                if (typeof player.loadVideoById === 'function') player.loadVideoById(song.id);
+            } else {
+                if (typeof player.playVideo === 'function') player.playVideo();
+            }
         }
     }
 }
@@ -277,16 +327,19 @@ function updateUIState() {
     const playBtn = document.getElementById("playBtn");
     const visualizer = document.getElementById("visualizer");
     
-    if (isPlaying) {
-        playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        visualizer.classList.add("playing");
-    } else {
-        playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        visualizer.classList.remove("playing");
+    if (playBtn) {
+        playBtn.innerHTML = isPlaying 
+            ? '<i class="fa-solid fa-pause"></i>' 
+            : '<i class="fa-solid fa-play"></i>';
+    }
+    
+    if (visualizer) {
+        visualizer.classList.toggle("playing", isPlaying);
     }
 }
 
 function prevSong() {
+    reproduciendoAnuncio = false;
     currentSongIndex--;
     if (currentSongIndex < 0) {
         currentSongIndex = playlistCategorias[currentCategory].length - 1;
@@ -295,9 +348,16 @@ function prevSong() {
 }
 
 function nextSong() {
-    currentSongIndex++;
-    if (currentSongIndex >= playlistCategorias[currentCategory].length) {
-        currentSongIndex = 0;
+    if (!reproduciendoAnuncio && publicidadList.length > 0) {
+        reproduciendoAnuncio = true;
+        loadAd();
+        currentAdIndex = (currentAdIndex + 1) % publicidadList.length;
+    } else {
+        reproduciendoAnuncio = false;
+        currentSongIndex++;
+        if (currentSongIndex >= playlistCategorias[currentCategory].length) {
+            currentSongIndex = 0;
+        }
+        loadSong(currentSongIndex);
     }
-    loadSong(currentSongIndex);
 }
