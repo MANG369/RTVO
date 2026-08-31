@@ -170,11 +170,11 @@ const playlistCategorias = {
 
 const bannersPublicitarios = [
     '<i class="fa-brands fa-tiktok"></i> MANG369: ¡Selección de Musica para ti! (ريهام) beautiful!',
-    "📢 RTVO: Conecta a través de la música!",
-    "🎧 RTVO: Sintoniza las listas de música en directo",
+    "📢 RTVO, Conecta a través de la música!",
+    "🎧 En RTVO, Sintoniza las listas de música en directo",
     "🔥 Sígueme en redes sociales",
     '<i class="fa-brands fa-whatsapp"></i> RTVO: Escríbeme por tu tema favorito.',
-    '<i class="fa-brands fa-discord"></i> Únete a la comunidad MANG369 en Discord.'
+    '<i class="fa-brands fa-discord"></i> Únete a la comunidad tiktok-MANG369 en Discord.'
 ];
 
 let player;
@@ -217,6 +217,7 @@ function onPlayerReady(event) {
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
         isPlaying = true;
+        if (typeof player.unMute === 'function') player.unMute();
         updateUIState();
     } else if (event.data === YT.PlayerState.PAUSED) {
         isPlaying = false;
@@ -273,10 +274,16 @@ function loadSong(index) {
     const song = playlistCategorias[currentCategory][index];
     if (!song) return;
 
+    if (player && typeof player.mute === 'function') {
+        player.mute();
+    }
+
     if (player && typeof player.loadVideoById === 'function') {
         player.loadVideoById(song.id);
         isPlaying = true;
         updateUIState();
+    } else {
+        forceReloadPlayer(song.id);
     }
     updateSongInfo();
 }
@@ -286,15 +293,31 @@ function togglePlay() {
     
     if (isPlaying) {
         if (typeof player.pauseVideo === 'function') player.pauseVideo();
+        if (typeof player.mute === 'function') player.mute();
+        isPlaying = false;
+        updateUIState();
     } else {
         const song = playlistCategorias[currentCategory][currentSongIndex];
         const videoData = (typeof player.getVideoData === 'function') ? player.getVideoData() : null;
+        
+        if (typeof player.unMute === 'function') player.unMute();
         
         if (!videoData || !videoData.video_id) {
             if (typeof player.loadVideoById === 'function') player.loadVideoById(song.id);
         } else {
             if (typeof player.playVideo === 'function') player.playVideo();
         }
+        isPlaying = true;
+        updateUIState();
+    }
+}
+
+function forceReloadPlayer(videoId) {
+    const iframe = document.getElementById('hidden-player');
+    if (iframe) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&controls=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`;
+        isPlaying = true;
+        updateUIState();
     }
 }
 
