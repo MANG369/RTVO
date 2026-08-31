@@ -12,10 +12,9 @@ const playlistCategorias = {
         { title: "Amor 10", id: "H1pnb-P68I0" },
         { title: "Amor 11", id: "XEvKn-QgAY0" },
         { title: "Amor 12", id: "HfzbN5ky5Co" },
-        { title: "Amor 13", id: "mJGRQ5gZmmc" },
+        { title: "Amor 13", id: "_6HpI5i84w8" },
         { title: "Amor 14", id: "lmDfmilZ4Xo" },
-        { title: "Amor 15", id: "15iEJ0qY_70" },
-        { title: "Amor 16", id: "_6HpI5i84w8" }
+        { title: "Amor 15", id: "15iEJ0qY_70" }
     ],
     EL_PATRON: [
         { title: "El Patrón 1", id: "LruRZKY3KFY" },
@@ -25,7 +24,7 @@ const playlistCategorias = {
     ],
     ARABE: [
         { title: "Árabe 1", id: "btYNNu8G5s4" },
-        { title: "Árabe 2", id: "Qz8agovq_kc" },
+        { title: "Árabe 2", id: "bVjbHxJ_7U0" },
         { title: "Árabe 3", id: "4gFtq4TQJFg" },
         { title: "Árabe 4", id: "GwTj6i-ce9A" },
         { title: "Árabe 5", id: "wF6X598iTxs" },
@@ -49,7 +48,7 @@ const playlistCategorias = {
         { title: "Árabe 23", id: "vFcTqzeHiBk" },
         { title: "Árabe 24", id: "ddq7TDJ2_VI" },
         { title: "Árabe 25", id: "PWhTtI0FBo4" },
-        { title: "Árabe 26", id: "bVjbHxJ_7U0" }
+        { title: "Árabe 26", id: "Qz8agovq_kc" }
     ],
     SALSA: [
         { title: "Salsa 1", id: "TwGU4D-f3KM" },
@@ -170,11 +169,11 @@ const playlistCategorias = {
 
 const bannersPublicitarios = [
     '<i class="fa-brands fa-tiktok"></i> MANG369: ¡Selección de Musica para ti! (ريهام) beautiful!',
-    "📢 RTVO, Conecta a través de la música!",
-    "🎧 En RTVO, Sintoniza las listas de música en directo",
+    "📢 RTVO Conecta a través de la música!",
+    "🎧 RTVO Sintoniza las listas de música en directo",
     "🔥 Sígueme en redes sociales",
-    '<i class="fa-brands fa-whatsapp"></i> RTVO: Escríbeme por tu tema favorito.',
-    '<i class="fa-brands fa-discord"></i> Únete a la comunidad tiktok-MANG369 en Discord.'
+    '<i class="fa-brands fa-whatsapp"></i> Escríbeme por tu tema favorito.',
+    '<i class="fa-brands fa-discord"></i> Únete a la comunidad tiktokMANG369 en Discord.'
 ];
 
 let player;
@@ -193,7 +192,8 @@ function onYouTubeIframeAPIReady() {
             'rel': 0,
             'modestbranding': 1,
             'iv_load_policy': 3,
-            'playsinline': 1
+            'playsinline': 1,
+            'enablejsapi': 1
         },
         events: {
             'onReady': onPlayerReady,
