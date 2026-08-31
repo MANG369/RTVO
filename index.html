@@ -17,7 +17,7 @@
 
         <!-- Encabezado con Logotipo -->
         <div class="header">
-            <h1 class="logo"><i class="fa-solid fa-compact-disc spin"></i> RTVO</h1>
+            <h1 class="logo"><i class="fa-solid fa-radio"></i> RTVO</h1>
         </div>
 
         <!-- Selector de Categorías -->
@@ -34,9 +34,11 @@
             </select>
         </div>
 
-      <!-- Visualizador Galáctico con Logo DJ -->
-        <div class="audio-visualizer" id="visualizer">
-            <img src="logo.jpeg" alt="DJ MANG 369" class="visualizer-logo" id="visualizerLogo">
+        <!-- Disco con Animación / Visualizador -->
+        <div class="visualizer-container">
+            <div id="visualizer" class="disc">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80" alt="Carátula" class="disc-img">
+            </div>
         </div>
 
         <!-- Información de la canción activa -->
@@ -62,7 +64,7 @@
     <!-- Contenedor Iframe invisible para la API de YouTube -->
     <div id="hidden-player" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
 
-    <!-- Scripts de carga -->
+    <!-- Carga de la API Oficial de YouTube y lógica del script -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
