@@ -1,7 +1,7 @@
 # RTVO
 ## Radio Televisora de Occidente
 
-# 🚀 Aspectos Técnicos Destacados
+# 🚀 Aspectos Técnicos 
 
 ## Flujo de Despliegue Estático:
 Configurado mediante .github/workflows/static.yml para una integración y publicación continuas.  
