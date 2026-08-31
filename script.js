@@ -171,11 +171,11 @@ const bannersPublicitarios = [
     "📢 RTVO:¡Un Espacio para ti. (Reham)beautiful.!",
     "🎧 Sintoniza las listas de Musica en directo",
     "🔥 Síguenos en nuestras redes Sociales",
-    "🚀 RTVO: Conecta a traves de la Musica"
-    "<i class="fa-brands fa-tiktok"></i> RTVO: ¡Un espacio para ti! (Reham) beautiful!"
-    "<i class="fa-brands fa-whatsapp"></i> RTVO: Escríbenos al directo y pide tu tema favorito."
-    "<i class="fa-brands fa-discord"></i> Únete a la comunidad en Discord."
-    ];
+    "🚀 RTVO: Conecta a traves de la Musica",
+    '<i class="fa-brands fa-tiktok"></i> RTVO: ¡Un espacio para ti! (Reham) beautiful!',
+    '<i class="fa-brands fa-whatsapp"></i> RTVO: Escríbenos al directo y pide tu tema favorito.',
+    '<i class="fa-brands fa-discord"></i> Únete a la comunidad en Discord.'
+];
 
 let player;
 let isPlaying = false;
@@ -333,13 +333,14 @@ function startBannerRotation() {
     const adBanner = document.getElementById("adBanner");
     if (!adBanner) return;
 
-    adBanner.textContent = bannersPublicitarios[0];
+    // Se cambió textContent por innerHTML para procesar las etiquetas <i class="...">
+    adBanner.innerHTML = bannersPublicitarios[0];
 
     setInterval(() => {
         bannerIndex = (bannerIndex + 1) % bannersPublicitarios.length;
         adBanner.style.opacity = '0';
         setTimeout(() => {
-            adBanner.textContent = bannersPublicitarios[bannerIndex];
+            adBanner.innerHTML = bannersPublicitarios[bannerIndex];
             adBanner.style.opacity = '1';
         }, 500);
     }, 15000);
