@@ -1,9 +1,9 @@
 const playlistCategorias = {
     AMOR: [
-        { title: "Amor 1", id: "bjw_PUWq9zE" },
+        { title: "Amor 1", id: "bVjbHxJ_7U0" },
         { title: "Amor 2", id: "Y_0gUaCb1C8" },
         { title: "Amor 3", id: "cMhT1SqxqHY" },
-        { title: "Amor 4", id: "4dyjL34qDis" },
+        { title: "Amor 4", id: "bjw_PUWq9zE" },
         { title: "Amor 5", id: "NgVmz3gfHd0" },
         { title: "Amor 6", id: "5UlLN3bXdqk" },
         { title: "Amor 7", id: "_OF-AaUlxCg" },
@@ -14,7 +14,8 @@ const playlistCategorias = {
         { title: "Amor 12", id: "HfzbN5ky5Co" },
         { title: "Amor 13", id: "_6HpI5i84w8" },
         { title: "Amor 14", id: "lmDfmilZ4Xo" },
-        { title: "Amor 15", id: "15iEJ0qY_70" }
+        { title: "Amor 15", id: "15iEJ0qY_70" },
+        { title: "Amor 16", id: "4dyjL34qDis" }
     ],
     EL_PATRON: [
         { title: "El Patrón 1", id: "LruRZKY3KFY" },
@@ -23,9 +24,9 @@ const playlistCategorias = {
         { title: "El Patrón 4", id: "Twazrsyj8DA" }
     ],
     ARABE: [
-        { title: "Árabe 1", id: "Qz8agovq_kc" },
-        { title: "Árabe 2", id: "bVjbHxJ_7U0" },
-        { title: "Árabe 3", id: "btYNNu8G5s4" },
+        { title: "Árabe 1", id: "btYNNu8G5s4" },
+        { title: "Árabe 2", id: "Qz8agovq_kc" },
+        { title: "Árabe 3", id: "PWhTtI0FBo4" },
         { title: "Árabe 4", id: "GwTj6i-ce9A" },
         { title: "Árabe 5", id: "wF6X598iTxs" },
         { title: "Árabe 6", id: "xjR_hZBey-Y" },
@@ -47,8 +48,7 @@ const playlistCategorias = {
         { title: "Árabe 22", id: "c9CXSbWIpMs" },
         { title: "Árabe 23", id: "vFcTqzeHiBk" },
         { title: "Árabe 24", id: "ddq7TDJ2_VI" },
-        { title: "Árabe 25", id: "PWhTtI0FBo4" },
-        { title: "Árabe 26", id: "4gFtq4TQJFg" }
+        { title: "Árabe 25", id: "4gFtq4TQJFg" }
     ],
     SALSA: [
         { title: "Salsa 1", id: "TwGU4D-f3KM" },
@@ -172,7 +172,10 @@ const bannersPublicitarios = [
     "🎧 Sintoniza las listas de Musica en directo",
     "🔥 Síguenos en nuestras redes Sociales",
     "🚀 RTVO: Conecta a traves de la Musica"
-];
+    "<i class="fa-brands fa-tiktok"></i> RTVO: ¡Un espacio para ti! (Reham) beautiful!"
+    "<i class="fa-brands fa-whatsapp"></i> RTVO: Escríbenos al directo y pide tu tema favorito."
+    "<i class="fa-brands fa-discord"></i> Únete a la comunidad en Discord."
+    ];
 
 let player;
 let isPlaying = false;
