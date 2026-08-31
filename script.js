@@ -168,11 +168,11 @@ const playlistCategorias = {
 };
 
 const bannersPublicitarios = [
-    '<i class="fa-brands fa-tiktok"></i> MANG369: ¡Selección de Música para ti!',
-    "📢 RTVO: Conecta a través de la música!",
-    "🎧 RTVO: Sintoniza las listas de música en directo",
-    "🔥 Síguenos en nuestras redes sociales",
-    '<i class="fa-brands fa-discord"></i> Únete a la comunidad MANG369 en Discord.'
+    '<i class="fa-brands fa-tiktok"></i> MANG369:¡Selección de Música para ti (ريهام)!',
+    "📢 RTVO Conecta a través de la música!",
+    "🎧 En RTVO: Sintoniza las listas de música en directo",
+    "🔥 Sígueme en redes sociales",
+    '<i class="fa-brands fa-discord"></i> Únete a la comunidad tiktok MANG369 en Discord.'
 ];
 
 let player;
@@ -341,4 +341,3 @@ function startBannerRotation() {
             adBanner.style.opacity = '1';
         }, 500);
     }, 15000);
-}
