@@ -175,7 +175,6 @@ const bannersPublicitarios = [
     '<i class="fa-brands fa-whatsapp"></i> Escríbeme por tu tema favorito.',
     '<i class="fa-brands fa-discord"></i> Únete a la comunidad tiktokMANG369 en Discord.'
 ];
-
 let player;
 let isPlaying = false;
 let currentCategory = "AMOR";
