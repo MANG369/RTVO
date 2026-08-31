@@ -23,9 +23,9 @@ const playlistCategorias = {
         { title: "El Patrón 4", id: "Twazrsyj8DA" }
     ],
     ARABE: [
-        { title: "Árabe 1", id: "Qz8agovq_kc" },
-        { title: "Árabe 2", id: "bVjbHxJ_7U0" },
-        { title: "Árabe 3", id: "btYNNu8G5s4" },
+        { title: "Árabe 1", id: "btYNNu8G5s4" },
+        { title: "Árabe 2", id: "4gFtq4TQJFg" },
+        { title: "Árabe 3", id: "Qz8agovq_kc" },
         { title: "Árabe 4", id: "GwTj6i-ce9A" },
         { title: "Árabe 5", id: "wF6X598iTxs" },
         { title: "Árabe 6", id: "xjR_hZBey-Y" },
@@ -48,8 +48,8 @@ const playlistCategorias = {
         { title: "Árabe 23", id: "vFcTqzeHiBk" },
         { title: "Árabe 24", id: "ddq7TDJ2_VI" },
         { title: "Árabe 25", id: "PWhTtI0FBo4" },
-        { title: "Árabe 26", id: "4gFtq4TQJFg" }
-    ],
+        { title: "Árabe 26", id: "bVjbHxJ_7U0" }
+        ],
     SALSA: [
         { title: "Salsa 1", id: "TwGU4D-f3KM" },
         { title: "Salsa 2", id: "8npywMdv0Sw" },
@@ -168,9 +168,9 @@ const playlistCategorias = {
 };
 
 const bannersPublicitarios = [
-    '<i class="fa-brands fa-tiktok"></i> MANG369: ¡Selección de Músical para ti. Reham!',
+    '<i class="fa-brands fa-tiktok"></i> MANG369 ¡Selección de Músical para ti. (ريهام)!',
     "📢 RTVO Conecta a través de la música!",
-    "🎧 En RTVOSintoniza las listas de música en directo",
+    "🎧 En RTVO Sintonizas la mejor música",
     "🔥 Sígueme en redes sociales",
     '<i class="fa-brands fa-discord"></i> Únete a la comunidad tiktok MANG369 en Discord.'
 ];
