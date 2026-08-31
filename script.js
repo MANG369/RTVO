@@ -169,7 +169,7 @@ const playlistCategorias = {
 
 // 📢 LISTA DE JINGLES / PROMOS PROPIOS
 const publicidadList = [
-    { title: "RTVO - Tu Música, Tu Espacio (Salsa)", id: "agK8buPQbxM" }
+    { title: "RTVO - Tu Música, Tu Espacio (Reham)", id: "agK8buPQbxM" }
 ];
 
 let player;
