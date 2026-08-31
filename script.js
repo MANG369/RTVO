@@ -166,10 +166,11 @@ const playlistCategorias = {
         { title: "General 30", id: "jRGrNDV2mKc" }
     ]
 };
+
 const bannersPublicitarios = [
-    '<i class="fa-brands fa-tiktok"></i> MANG369:¡Selección de Música para ti (ريهام)!',
+    '<i class="fa-brands fa-tiktok"></i> MANG369: ¡Selección de Músical para ti. Reham!',
     "📢 RTVO Conecta a través de la música!",
-    "🎧 En RTVO: Sintoniza las listas de música en directo",
+    "🎧 En RTVOSintoniza las listas de música en directo",
     "🔥 Sígueme en redes sociales",
     '<i class="fa-brands fa-discord"></i> Únete a la comunidad tiktok MANG369 en Discord.'
 ];
@@ -340,3 +341,4 @@ function startBannerRotation() {
             adBanner.style.opacity = '1';
         }, 500);
     }, 15000);
+}
