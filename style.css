@@ -7,15 +7,10 @@
 
 body {
     background-color: #030308;
-    /* Capas de Nebulosas y Estrellas en CSS Puro */
     background-image: 
-        /* Polvo estelar azul violáceo */
         radial-gradient(circle at 20% 20%, rgba(76, 29, 149, 0.45) 0%, transparent 40%),
-        /* Núcleo cian resplandeciente */
         radial-gradient(circle at 80% 80%, rgba(0, 210, 255, 0.35) 0%, transparent 50%),
-        /* Destello galáctico central */
         radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.25) 0%, transparent 60%),
-        /* Campo de estrellas distantes (patrón de puntos) */
         radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0,0,0,0)),
         radial-gradient(1.5px 1.5px at 150px 210px, #00d2ff, rgba(0,0,0,0)),
         radial-gradient(2px 2px at 300px 400px, #ffffff, rgba(0,0,0,0)),
@@ -34,14 +29,9 @@ body {
     animation: galaxyGlow 12s ease-in-out infinite alternate;
 }
 
-/* Animación sutil del resplandor de la galaxia */
 @keyframes galaxyGlow {
-    0% {
-        filter: hue-rotate(0deg) brightness(1);
-    }
-    100% {
-        filter: hue-rotate(25deg) brightness(1.15);
-    }
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    100% { filter: hue-rotate(25deg) brightness(1.15); }
 }
 
 .player-container {
@@ -56,11 +46,33 @@ body {
     border: 1px solid rgba(0, 210, 255, 0.3);
 }
 
+/* Banner Publicitario */
+#adBanner {
+    background: rgba(0, 0, 0, 0.6);
+    color: #00ffcc;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    transition: opacity 0.5s ease;
+}
+
 .player-header {
     text-align: center;
     margin-bottom: 20px;
     color: #00d2ff;
     text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+}
+
+.spin {
+    animation: spinIcon 8s linear infinite;
+}
+
+@keyframes spinIcon {
+    100% { transform: rotate(360deg); }
 }
 
 .category-selector {
@@ -78,37 +90,56 @@ body {
     border-radius: 8px;
     outline: none;
     width: 70%;
+    cursor: pointer;
 }
 
+/* Visualizador con Logo DJ circular */
 .audio-visualizer {
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
     margin: 0 auto 20px auto;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, rgba(5, 5, 15, 0.8) 100%);
     border: 3px solid #00d2ff;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
     transition: all 0.3s ease;
+    overflow: hidden;
+    background: #000;
 }
 
+.visualizer-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+}
+
+/* Efecto de pulso al sonar la música */
 .audio-visualizer.playing {
-    box-shadow: 0 0 40px rgba(0, 210, 255, 0.8);
+    box-shadow: 0 0 40px rgba(0, 210, 255, 0.8), 0 0 15px rgba(147, 51, 234, 0.6);
     animation: pulse 1.8s infinite ease-in-out;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
-    100% { transform: scale(1); }
+.audio-visualizer.playing .visualizer-logo {
+    transform: scale(1.05);
 }
 
-.music-icon {
-    font-size: 3rem;
-    color: #00d2ff;
-    filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.8));
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+    }
+    50% {
+        transform: scale(1.04);
+        box-shadow: 0 0 45px rgba(0, 210, 255, 0.9), 0 0 20px rgba(0, 255, 204, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+    }
 }
 
 .now-playing {

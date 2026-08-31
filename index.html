@@ -9,11 +9,14 @@
 </head>
 <body>
     <div class="player-container">
+        <!-- Banner Publicitario Dinámico -->
+        <div id="adBanner">📢 RTVO: ¡Tu Música, Tu Espacio!</div>
+
         <header class="player-header">
             <h2><i class="fa-solid fa-compact-disc spin"></i> RTVO </h2>
         </header>
 
-        <!-- Selector de Categoría -->
+        <!-- Selector de Categorías -->
         <div class="category-selector">
             <label for="categorySelect">Categoría:</label>
             <select id="categorySelect" onchange="changeCategory()">
@@ -27,12 +30,12 @@
             </select>
         </div>
 
-        <!-- Visualizador de Carátula Galáctico -->
+        <!-- Visualizador Galáctico con Logo DJ -->
         <div class="audio-visualizer" id="visualizer">
-            <i class="fa-solid fa-radio music-icon"></i>
+            <img src="logo.jpeg" alt="DJ MANG 369" class="visualizer-logo" id="visualizerLogo">
         </div>
 
-        <!-- Contenedor del reproductor de YouTube (oculto de forma segura) -->
+        <!-- Reproductor iframe oculto de YouTube -->
         <div id="hidden-player" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
 
         <div class="now-playing">
@@ -40,7 +43,7 @@
             <p id="songArtist">Categoría: AMOR</p>
         </div>
 
-        <!-- Controles principales -->
+        <!-- Controles de reproducción -->
         <div class="controls">
             <button onclick="prevSong()" class="btn" title="Anterior"><i class="fa-solid fa-backward"></i></button>
             <button id="playBtn" onclick="togglePlay()" class="btn btn-main" title="Reproducir/Pausar"><i class="fa-solid fa-play"></i></button>
@@ -54,7 +57,6 @@
         </div>
     </div>
 
-    <!-- API de YouTube IFrame -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
