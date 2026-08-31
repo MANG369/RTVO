@@ -182,6 +182,7 @@ let isPlaying = false;
 let currentCategory = "AMOR";
 let currentSongIndex = 0;
 let bannerIndex = 0;
+let bannerInterval = null;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('hidden-player', {
@@ -259,7 +260,7 @@ function updateSongInfo() {
     const song = playlistCategorias[currentCategory][currentSongIndex];
 
     if (titleEl) titleEl.textContent = song ? song.title : "Título no disponible";
-    if (artistEl) artistEl.textContent = `Categoría: ${currentCategory.replace('_', ' ')}`;
+    if (artistEl) artistEl.textContent = `Categoría: ${currentCategory.replace(/_/g, ' ')}`;
     
     const items = document.querySelectorAll("#playlist li");
     items.forEach((item, i) => {
@@ -332,9 +333,11 @@ function startBannerRotation() {
     const adBanner = document.getElementById("adBanner");
     if (!adBanner) return;
 
+    if (bannerInterval) clearInterval(bannerInterval);
+
     adBanner.innerHTML = bannersPublicitarios[0];
 
-    setInterval(() => {
+    bannerInterval = setInterval(() => {
         bannerIndex = (bannerIndex + 1) % bannersPublicitarios.length;
         adBanner.style.opacity = '0';
         setTimeout(() => {
