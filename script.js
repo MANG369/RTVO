@@ -1,6 +1,5 @@
 const playlistCategorias = {
     AMOR: [
-        { title: "Amor 0", id: "agK8buPQbxM" },
         { title: "Amor 1", id: "bjw_PUWq9zE" },
         { title: "Amor 2", id: "Y_0gUaCb1C8" },
         { title: "Amor 3", id: "cMhT1SqxqHY" },
@@ -19,18 +18,16 @@ const playlistCategorias = {
         { title: "Amor 16", id: "_6HpI5i84w8" }
     ],
     EL_PATRON: [
-        { title: "El Patrón 0", id: "agK8buPQbxM" },
         { title: "El Patrón 1", id: "LruRZKY3KFY" },
         { title: "El Patrón 2", id: "U3fMHWnUWLI" },
         { title: "El Patrón 3", id: "6Lielvgiu3E" },
         { title: "El Patrón 4", id: "Twazrsyj8DA" }
     ],
     ARABE: [
-        { title: "Árabe 0", id: "agK8buPQbxM" },
-        { title: "Árabe 1", id: "btYNNu8G5s4" },
-        { title: "Árabe 2", id: "Qz8agovq_kc" },
-        { title: "Árabe 3", id: "GwTj6i-ce9A" },
-        { title: "Árabe 4", id: "PWhTtI0FBo4" },
+        { title: "Árabe 1", id: "Qz8agovq_kc" },
+        { title: "Árabe 2", id: "bVjbHxJ_7U0" },
+        { title: "Árabe 3", id: "btYNNu8G5s4" },
+        { title: "Árabe 4", id: "GwTj6i-ce9A" },
         { title: "Árabe 5", id: "wF6X598iTxs" },
         { title: "Árabe 6", id: "xjR_hZBey-Y" },
         { title: "Árabe 7", id: "HuXQt07KjYc" },
@@ -51,10 +48,10 @@ const playlistCategorias = {
         { title: "Árabe 22", id: "c9CXSbWIpMs" },
         { title: "Árabe 23", id: "vFcTqzeHiBk" },
         { title: "Árabe 24", id: "ddq7TDJ2_VI" },
-        { title: "Árabe 25", id: "4gFtq4TQJFg" }
+        { title: "Árabe 25", id: "PWhTtI0FBo4" },
+        { title: "Árabe 26", id: "4gFtq4TQJFg" }
     ],
-    SALSA: [ 
-        { title: "Salsa 0", id: "agK8buPQbxM" },
+    SALSA: [
         { title: "Salsa 1", id: "TwGU4D-f3KM" },
         { title: "Salsa 2", id: "8npywMdv0Sw" },
         { title: "Salsa 3", id: "D_0FKJqxldE" },
@@ -77,7 +74,6 @@ const playlistCategorias = {
         { title: "Salsa 20", id: "TnldDo_T6i8" }
     ],
     MEDICINA: [
-        { title: "Medicina 0", id: "agK8buPQbxM" },
         { title: "Medicina 1", id: "LfrBaI3Gf_g" },
         { title: "Medicina 2", id: "rHuUa0radLw" },
         { title: "Medicina 3", id: "x2hg9m1oJJc" },
@@ -120,7 +116,6 @@ const playlistCategorias = {
         { title: "Medicina 40", id: "jiG8LDcsCHA" }
     ],
     LLANERAS: [
-        { title: "Llanera 0", id: "agK8buPQbxM" },
         { title: "Llanera 1", id: "FImOYoyORE4" },
         { title: "Llanera 2", id: "gXBWmWq9FsU" },
         { title: "Llanera 3", id: "vTF3PlSvb78" },
@@ -140,7 +135,6 @@ const playlistCategorias = {
         { title: "Llanera 17", id: "4Y3jV2St_f8" }
     ],
     GENERAL: [
-        { title: "General 0", id: "agK8buPQbxM" },
         { title: "General 1", id: "GZ3zL7kT6_c" },
         { title: "General 2", id: "Jp7jM7yJKB4" },
         { title: "General 3", id: "WRcCBI5rFfM" },
@@ -174,17 +168,10 @@ const playlistCategorias = {
     ]
 };
 
-// 📢 LISTA DE JINGLES / PROMOS PROPIOS
-const publicidadList = [
-    { title: "RTVO - Tu Música, Tu Espacio (Reham)", id: "xxxx" }
-];
-
 let player;
 let isPlaying = false;
 let currentCategory = "AMOR";
 let currentSongIndex = 0;
-let currentAdIndex = 0;
-let reproduciendoAnuncio = false;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('hidden-player', {
@@ -194,7 +181,7 @@ function onYouTubeIframeAPIReady() {
             'controls': 0,
             'rel': 0,
             'modestbranding': 1,
-            'iv_load_policy': 3, // Oculta anotaciones y tarjetas emergentes de YouTube
+            'iv_load_policy': 3,
             'playsinline': 1
         },
         events: {
@@ -227,52 +214,34 @@ function onPlayerStateChange(event) {
 
 function changeCategory() {
     const select = document.getElementById("categorySelect");
-    if (!select) return;
     currentCategory = select.value;
     currentSongIndex = 0;
-    reproduciendoAnuncio = false;
     renderPlaylist();
     loadSong(0);
 }
 
 function renderPlaylist() {
     const playlistEl = document.getElementById("playlist");
-    if (!playlistEl) return;
     playlistEl.innerHTML = "";
     
     playlistCategorias[currentCategory].forEach((song, index) => {
         const li = document.createElement("li");
         li.textContent = `${index + 1}. ${song.title}`;
-        if (index === currentSongIndex && !reproduciendoAnuncio) li.classList.add("active");
-        li.onclick = () => {
-            reproduciendoAnuncio = false;
-            loadSong(index);
-        };
+        if (index === currentSongIndex) li.classList.add("active");
+        li.onclick = () => loadSong(index);
         playlistEl.appendChild(li);
     });
 }
 
 function updateSongInfo() {
-    const titleEl = document.getElementById("songTitle");
-    const artistEl = document.getElementById("songArtist");
-
-    if (reproduciendoAnuncio) {
-        const ad = publicidadList[currentAdIndex];
-        if (titleEl) titleEl.textContent = `📢 ${ad.title}`;
-        if (artistEl) artistEl.textContent = "Jingle Oficial - RTVO";
-        
-        const items = document.querySelectorAll("#playlist li");
-        items.forEach(item => item.classList.remove("active"));
-    } else {
-        const song = playlistCategorias[currentCategory][currentSongIndex];
-        if (titleEl) titleEl.textContent = song.title;
-        if (artistEl) artistEl.textContent = `Categoría: ${currentCategory.replace('_', ' ')}`;
-        
-        const items = document.querySelectorAll("#playlist li");
-        items.forEach((item, i) => {
-            item.classList.toggle("active", i === currentSongIndex);
-        });
-    }
+    const song = playlistCategorias[currentCategory][currentSongIndex];
+    document.getElementById("songTitle").textContent = song.title;
+    document.getElementById("songArtist").textContent = `Categoría: ${currentCategory.replace('_', ' ')}`;
+    
+    const items = document.querySelectorAll("#playlist li");
+    items.forEach((item, i) => {
+        item.classList.toggle("active", i === currentSongIndex);
+    });
 }
 
 function loadSong(index) {
@@ -287,33 +256,19 @@ function loadSong(index) {
     updateSongInfo();
 }
 
-function loadAd() {
-    const ad = publicidadList[currentAdIndex];
-    if (player && player.loadVideoById) {
-        player.loadVideoById(ad.id);
-        isPlaying = true;
-        updateUIState();
-    }
-    updateSongInfo();
-}
-
 function togglePlay() {
     if (!player) return;
     
     if (isPlaying) {
         player.pauseVideo();
     } else {
-        if (reproduciendoAnuncio) {
-            player.playVideo();
+        const song = playlistCategorias[currentCategory][currentSongIndex];
+        const videoData = player.getVideoData ? player.getVideoData() : null;
+        
+        if (!videoData || !videoData.video_id) {
+            player.loadVideoById(song.id);
         } else {
-            const song = playlistCategorias[currentCategory][currentSongIndex];
-            const videoData = player.getVideoData ? player.getVideoData() : null;
-            
-            if (!videoData || !videoData.video_id) {
-                player.loadVideoById(song.id);
-            } else {
-                player.playVideo();
-            }
+            player.playVideo();
         }
     }
 }
@@ -322,19 +277,16 @@ function updateUIState() {
     const playBtn = document.getElementById("playBtn");
     const visualizer = document.getElementById("visualizer");
     
-    if (playBtn) {
-        playBtn.innerHTML = isPlaying 
-            ? '<i class="fa-solid fa-pause"></i>' 
-            : '<i class="fa-solid fa-play"></i>';
-    }
-    
-    if (visualizer) {
-        visualizer.classList.toggle("playing", isPlaying);
+    if (isPlaying) {
+        playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        visualizer.classList.add("playing");
+    } else {
+        playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        visualizer.classList.remove("playing");
     }
 }
 
 function prevSong() {
-    reproduciendoAnuncio = false;
     currentSongIndex--;
     if (currentSongIndex < 0) {
         currentSongIndex = playlistCategorias[currentCategory].length - 1;
@@ -343,16 +295,9 @@ function prevSong() {
 }
 
 function nextSong() {
-    if (!reproduciendoAnuncio && publicidadList.length > 0) {
-        reproduciendoAnuncio = true;
-        loadAd();
-        currentAdIndex = (currentAdIndex + 1) % publicidadList.length;
-    } else {
-        reproduciendoAnuncio = false;
-        currentSongIndex++;
-        if (currentSongIndex >= playlistCategorias[currentCategory].length) {
-            currentSongIndex = 0;
-        }
-        loadSong(currentSongIndex);
+    currentSongIndex++;
+    if (currentSongIndex >= playlistCategorias[currentCategory].length) {
+        currentSongIndex = 0;
     }
+    loadSong(currentSongIndex);
 }
